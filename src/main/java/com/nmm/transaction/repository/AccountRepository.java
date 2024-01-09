@@ -15,4 +15,6 @@ public interface AccountRepository extends JpaRepository<Account,Integer> {
 
     @Query(value = "select u from user u where u.userId = ?1",nativeQuery = true)
     Account findAccountByUser(int userId);
+
+    Account findByAccountNo(String accountNo);
 }

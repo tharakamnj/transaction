@@ -65,11 +65,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public ResponseEntity<CommonResponse> findAllTransactionByAccount(int accountId) {
+    public ResponseEntity<CommonResponse> findAllTransactionByAccount(String accountNo) {
         log.info("Start findAllTransactionByAccount method ");
         CommonResponse commonResponse = new CommonResponse();
 
-        List<Transaction> existingTransactions = transactionRepository.findByAccountId(accountId);
+        Account account = accountRepository.findByAccountNo(accountNo);
+
+        List<Transaction> existingTransactions = transactionRepository.findByAccountId(account.getAccountId());
         Collections.sort(existingTransactions, Comparator.comparing(Transaction::getDate));
 
         commonResponse.setPayload(Collections.singletonList(existingTransactions));
