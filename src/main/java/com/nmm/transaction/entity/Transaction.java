@@ -18,7 +18,7 @@ public class Transaction {
     private String type;
     private double transactionAmount;
     private double currentAmount;
-    private int account;
+    private int accountId;
     private Date date;
     private String modifiedBy;
 }
