@@ -39,16 +39,18 @@ public class TransactionServiceImpl implements TransactionService {
         log.info("Start makeTransaction method with AccountDto: " + dto);
         CommonResponse commonResponse = new CommonResponse();
 
-        Account account = accountRepository.findById(dto.getAccount()).get();
+        Account account = accountRepository.findByAccountNo(dto.getAccountNo());
+
+        /*List<Transaction> transactions = transactionRepository.findByAccountId(account.getAccountId());
 
         Transaction existingTransaction = Collections.max(transactionRepository.findByAccountId(account.getAccountId()),
-                Comparator.comparing(Transaction::getDate));
+                Comparator.comparing(Transaction::getDate));*/
 
         Transaction transaction = transactionRepository.save(new Transaction(
                 dto.getTransactionId(),
                 dto.getType(),
                 dto.getTransactionAmount(),
-                dto.getType() == "CR" ? existingTransaction.getCurrentAmount() + dto.getTransactionAmount() : existingTransaction.getCurrentAmount() - dto.getTransactionAmount(),
+                dto.getType().equals("cr") ? account.getAvailableBalance() + dto.getTransactionAmount() : account.getAvailableBalance() - dto.getTransactionAmount(),
                 account.getAccountId(),
                 new Date(),
                 dto.getModifiedBy()

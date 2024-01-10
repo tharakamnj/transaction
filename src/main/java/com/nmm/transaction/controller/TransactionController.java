@@ -41,7 +41,7 @@ public class TransactionController {
     }
 
     @GetMapping("/allTransactionByAccount/{accountNo}")
-    public ResponseEntity<CommonResponse> findAllTransactionByAccount(@PathVariable("accountId") String accountNo){
+    public ResponseEntity<CommonResponse> findAllTransactionByAccount(@PathVariable("accountNo") String accountNo){
         log.info("Start findAllTransactionByAccount method");
         ResponseEntity<CommonResponse> responseEntity = null;
         CommonResponse commonResponse = new CommonResponse();

@@ -14,7 +14,7 @@ public class TransactionDto {
     private String type;
     private double transactionAmount;
     private double currentAmount;
-    private int account;
+    private String accountNo;
     private Date date;
     private String modifiedBy;
 }
