@@ -1,5 +1,6 @@
 package com.nmm.transaction.dto;
 
+import com.nmm.transaction.util.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,10 +12,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class TransactionDto {
     private int transactionId;
-    private String type;
+    private TransactionType type;
     private double transactionAmount;
     private double currentAmount;
     private String accountNo;
+    private String trAccountNo;
     private Date date;
     private String modifiedBy;
 }

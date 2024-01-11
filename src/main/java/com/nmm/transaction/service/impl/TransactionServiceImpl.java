@@ -9,6 +9,7 @@ import com.nmm.transaction.repository.TransactionRepository;
 import com.nmm.transaction.service.TransactionService;
 import com.nmm.transaction.util.CommonConst;
 import com.nmm.transaction.util.CommonResponse;
+import com.nmm.transaction.util.TransactionType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,8 +51,9 @@ public class TransactionServiceImpl implements TransactionService {
                 dto.getTransactionId(),
                 dto.getType(),
                 dto.getTransactionAmount(),
-                dto.getType().equals("cr") ? account.getAvailableBalance() + dto.getTransactionAmount() : account.getAvailableBalance() - dto.getTransactionAmount(),
+                dto.getType() == TransactionType.CR ? account.getAvailableBalance() + dto.getTransactionAmount() : account.getAvailableBalance() - dto.getTransactionAmount(),
                 account.getAccountId(),
+                dto.getType() == TransactionType.ONLINE ? dto.getTrAccountNo() : null,
                 new Date(),
                 dto.getModifiedBy()
         ));
